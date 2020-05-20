@@ -742,7 +742,7 @@ plt.title("Min, Median, and Max Runtime of Regular Expressions vs. If Statements
 # loc specifies the location of the legend on the graph
 plt.legend(loc="upper left")
 
-# Add labels to the x and y-axes
+# Add label to the y axis
 plt.ylabel('Time to Run in Seconds')
 
 # Add a grid to the graph background
@@ -781,7 +781,7 @@ plt.title("Min, Median, and Max Runtime of Regular Expressions vs. If Statements
 # loc specifies the location of the legend on the graph
 plt.legend(loc="upper left")
 
-# Add labels to the x and y-axes
+# Add label to the y axis
 plt.ylabel('Time to Run in Seconds')
 
 # Add a grid to the graph background
