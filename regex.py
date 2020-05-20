@@ -736,7 +736,7 @@ plt.plot(x_axis, [sorted_if_statements_email_1[0], \
          'k-', label="If Statements Email")
 
 # Set a title for the plot
-plt.title("Min, Median, and Max Runtime of Regular Expressions vs. If Statements in Different While Loop")
+plt.title("Min, Median, and Max Runtime of Regular Expressions vs. If Statements in Different While Loops")
 
 # Add a legend to the graph
 # loc specifies the location of the legend on the graph
