@@ -100,15 +100,17 @@ def snake(snake_size: int, snake_list: List[List[int]], snake_length: int):
     else:
         head = pygame.transform.rotate(head_img, 180)
     
-    # Draw the snake head from the image we made
-    game_display.blit(head, snake_list[-1])
     # Draw the rest of the blocks as rectangles
     for x_and_y in snake_list[:-1]:
         # Parameters: surface to draw on, color, coordinates (top left of object, width, height)
         pygame.draw.rect(game_display, GREEN, [x_and_y[0], x_and_y[1], snake_size, snake_size])
         
         # Can be graphics-accelerated; i.e. can do things that makes this quicker for processing compared to draw.rect
-        # game_display.fill(RED, rect=[200, 200, 50, 50])   
+        # game_display.fill(RED, rect=[200, 200, 50, 50])
+    
+    # Draw the snake head from the image we made
+    game_display.blit(head, snake_list[-1])
+    
 
 def generate_food(snake_list: List[List[int]] = []) -> List[List[int]]:
     '''
