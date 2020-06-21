@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" standalone = "no"?>
+<!--
+"no" is the default value for standalone, so it does not actually have to be declared.
+This just means that we refer to outside documents in the XML (mainly the DTD, as well as the ENTs declared there)
+-->
+
+<!--
+This links this XML document to an XSLT style sheet.
+Thus when this document is opened in an XSLT processor or a browser, this instruction tells
+the processor to perform the XSLT transfromation before displaying the document.
+-->
+<?xml-stylesheet type="text/xsl" href="xsl-transform.xsl"?>
+<!--
+This declares which DTD should be used to validate this XML document.
+System indicates the DTD is external. ancient_wonders is the root element of this XML document.
+-->
+<!DOCTYPE ancient_wonders SYSTEM "dtd-wonders.dtd">
+<!--
+We can also add elements/attribute lists/etc. onto the referenced DTD by writing
+<!DOCTYPE ancient_wonders SYSTEM "dtd-wonders.dtd" [
+	...
+]>
+with the additional elements/attribute lists/etc. written out within the brackets.
+The internal elements take precedence over external ones, though most verifiers will just throw an error if they conflict.
+-->
+<!-- If we instead wanted to write an internal DTD, we could declare
+<!DOCTYPE ancient_wonders [
+	...
+]>
+with the DTD written out within the brackets.
+-->
+
+
+<ancient_wonders>
+	<wonder>
+
+<!-- Note: For many of the wonders, the experts do not agree on precise dates or construction dimensions.  In these cases, I chose a year or dimension in the middle of the range so all attributes could be numeric. -->
+		<name language="English">Colossus of Rhodes</name>
+		<name language="Greek">Κολοσσός της Ρόδου</name>
+
+		<location>Rhodes, Greece</location>
+		<height units="feet">107</height>
+		<history>
+			<year_built era="BC">282</year_built>
+			<year_destroyed era="BC">226</year_destroyed>
+			<how_destroyed>earthquake</how_destroyed>
+			<story>
+        In 294 BC, the people of the island of Rhodes began building a colossal statue of the sun god Helios.  They believed that it was because of his blessings that they were able to withstand a long siege on the island and emerge victorious.<para/>The Colossus was built with bronze, reinforced with iron, and weighted with stones.  While it is often depicted straddling Mandrákion harbor, this is now considered technically impossible; and therefore, it likely stood beside the harbor.<para/>The statue was toppled by an earthquake in 226 BC.  It snapped at the knees and fell over on to the land.  The Oracle of Delphi suggested that it fell because the people of Rhodes had offended Helios, and they decided not to rebuild it.<para/>The statue remained on the ground until 654 AD., and even broken, it was so impressive that many traveled to see it.
+      </story>
+		</history>
+		<main_image file="colossus.jpg" w="528" h="349"/>
+		<source sectionid="101" newspaperid="21"/>
+	</wonder>
+	<wonder>
+		<name language="English">Great Pyramid of Giza</name>
+		<location>Giza, Egypt</location>
+		<height units="feet">455</height>
+		<history>
+			<year_built era="BC">2570</year_built>
+			<story>
+        It is believed to have taken 20 years and as many as 100,000 workers to complete the Great Pyramid, which was built as a tomb for the 4th dynasty Egyptian pharaoh named Khufu.  It was built as part of a complex that included temples and many other pyramids.<para/>The outermost stones of the pyramid were highly polished white limestone, which were eventually loosened by an earthquake more than 600 years ago, and were removed to help build cities and mosques.  When these casing stones were present, some believe that the pyramid was so large and bright that it could be seen from the moon.<para/>There is much speculation about the construction methodologies and intentions of the pyramid, including references to the moon, the Orion constellation, continental gravity, and more.  What is known, however, is that the four sides of the base are more than 700 feet long, and differ in length by no more than 8 inches.  Each side of the pyramid is almost perfectly aligned with the four cardinal points of the compass.  And, the pyramid's dimensions covert to a ratio that equates to 2π with nearly perfect accuracy.
+      </story>
+		</history>
+		<main_image file="pyramid.jpg" w="528" h="349"/>
+		<source sectionid="123" newspaperid="71"/>
+		<source sectionid="21" newspaperid="42"/>
+	</wonder>
+	<wonder>
+		<name language="English">Hanging Gardens of Babylon</name>
+		<location>Al Hillah, Iraq</location>
+		<height units="feet">0</height>
+		<history>
+			<year_built era="BC">600</year_built>
+			<year_destroyed era="BC">226</year_destroyed>
+			<how_destroyed>earthquake</how_destroyed>
+			<story>
+        The first and most interesting fact about the gardens is that there is significant controversy about whether the gardens existed at all.<para/>Whether they did or did not exist, there are many elaborate accounts and poetic descriptions of the gardens.  They are generally believed to have been built by King Nebuchadrezzar II for his wife because she missed the gardens of her home.  Some research suggests that it was an elaborate series of rooftop gardens.  Another theory suggests that the gardens were built in the walls of the royal palace.<para/>Babylon, being in the middle of the desert, had no such natural greenery, however; calling into question of how such lushness would have survived in the dryness of the desert.  Recent excavations have suggested the use of an exceptional system of irrigation using a cellar well in conjunction with a chain pump to raise the water to the gardens.  Still, other theories even suggest that the gardens weren't in Babylon at all.  Rather, that they were constructed by Sennacherib at the eastern bank of the Tigris river.<para/>Regardless of the final outcome, it is interesting to note that the imagination of the poets and ancient historians have created one of the &wow;.
+      </story>
+		</history>
+		<main_image file="gardens.jpg" w="528" h="349"/>
+		<source sectionid="11" newspaperid="24"/>
+		<source sectionid="18" newspaperid="151"/>
+	</wonder>
+	<wonder>
+		<name language="English">Statue of Zeus at Olympia</name>
+		<name language="Greek">Δίας μυθολογία</name>
+		<location>Olympia, Greece</location>
+		<height units="feet">39</height>
+		<history>
+			<year_built era="BC">430</year_built>
+			<year_destroyed era="AD">426</year_destroyed>
+			<how_destroyed>fire</how_destroyed>
+			&zeus;
+    </history>
+		<main_image file="zeus.jpg" w="528" h="349"/>
+	</wonder>
+	<wonder>
+		<name language="English">Temple of Artemis at Ephesus</name>
+		<name language="Greek">Ἀρτεμίσιον</name>
+		<location>Ephesus, Turkey</location>
+		<height units="feet">60</height>
+		<history>
+			<year_built era="BC">550</year_built>
+			<year_destroyed era="BC">356</year_destroyed>
+			<how_destroyed>fire</how_destroyed>
+			<story>The Temple of Artemis at Ephesus was built and rebuilt over the course of many years.  The most famous was built in about 550 BC and was funded by King Croesus of Lydia.<para/>Unlike many other temples of its time, it was built of marble and glittered with gold.  The temple's foundation was over 180 by 350 feet and its steps led to a high platform on which stood more than one hundred beautifully sculptured columns that supported its roof.  At least twice the size of the Parthenon, it was so breathtaking it was said to rise to the clouds.<para/>The temple housed many incredible works of art, but the most famous was the statue of Artemis herself.  Although the original no longer exists, it was thought to have been made of gold and other beautiful materials.  Her legs were covered with animals and bees and the top of the body covered with breasts symbolizing fertility.<para/>Although destroyed and rebuilt many times, and ultimately left to be destroyed by man, nature and neglect, the most famous version of the temple was destroyed by arson committed by a man named Herostratus on the night Alexander the Great was born.</story>
+		</history>
+		<main_image file="artemis.jpg" w="528" h="349"/>
+		<source sectionid="92" newspaperid="19"/>
+	</wonder>
+	<wonder>
+		<name language="English">Mausoleum at Halicarnassus</name>
+		<name language="Greek">Μαυσωλεῖον Ἁλικαρνασσεύς</name>
+		<location>Bodrum, Turkey</location>
+		<height units="feet">135</height>
+		<history>
+			<year_built era="BC">352</year_built>
+			<year_destroyed era="AD">1404</year_destroyed>
+			<how_destroyed>earthquake</how_destroyed>
+			<story>The monument was built as a tomb for Mausolus, a governor in the Persian Empire. Sparing no expense, his widowed wife Artemisia (who was also his sister as was considered customary) commissioned well-known Greek architects and artists to design the tomb and sculptural reliefs for each of the four sides of the building.<para/>The monument was almost square, nearly 14 stories tall, and its base was more than 10,000 square feet. Each side of the tomb had nine massive columns, and the top was a stepped pyramid on which stood by a four-horse marble chariot in which there were images of Mausolus and Artemisia.<para/>The monument stood for nearly 17 centuries and was eventually destroyed by a series of earthquakes. And, like the Lighthouse of Alexandria, the tomb was so famous that Mausolus's name has become the root word for large tombs in many languages (for example, "mausoleo" in Spanish).</story>
+		</history>
+		<main_image file="mausoleum.jpg" w="528" h="349"/>
+		<source sectionid="141" newspaperid="21"/>
+		<source sectionid="2" newspaperid="19"/>
+	</wonder>
+	<wonder>
+		<name language="English">Lighthouse of Alexandria</name>
+		<name language="Greek">ὁ Φάρος τῆς Ἀλεξανδρείας</name>
+		<location>Alexandria, Egypt</location>
+		<height units="feet">384</height>
+		<history>
+			<year_built era="BC">280</year_built>
+			<year_destroyed era="AD">1323</year_destroyed>
+			<how_destroyed>earthquake</how_destroyed>
+			<story>
+        Located on the island of Pharos in the harbor of Alexandria, the lighthouse may be the most famous lighthouse in history.  The lighthouse was very different than modern lighthouses in that it was built in three stages, all sloping inward.  Built of marble blocks with lead mortar; the lowest was square, the next octagonal, and the top cylindrical.  Within the lighthouse was a ramp and "dumbwaiter" that allowed wood to be transported to the fire that burned at night.<para/>Inside the open top of the lighthouse was a large curved mirror that was used to reflect the sunlight during the day and the fire at night.  It is said that mariners could see the light up to 35 miles away.  Legends have it that the light was so bright it could be used to burn enemy ships.<para/>There are many stories about its ultimate demise, however, the most likely cause is believed to be as many as 22 earthquakes between 320 AD and 1323 AD which led to its decommission.<para/>The Lighthouse of Alexandria was so famous in ancient times that the island on which it stood, Pharos, became the root word for lighthouse in many languages (for example, "phare" in French).
+      </story>
+		</history>
+		<main_image file="lighthouse.jpg" w="528" h="349"/>
+		<source sectionid="112" newspaperid="53"/>
+	</wonder>
+</ancient_wonders>
+
+<!--
+We can define multiple name spaces as follows:
+<ancient_wonders xmlns="http://www.kehogo.com/ns/wonders/1.0" xmlns:anc_civ="http://www.kehogo.com/ns/ancient_civ/2.3">
+The first one makes a default namespace that applies to the root element and all its children,
+we can create such a default namespace in the same way in any element, not just the root.
+A default namespace will be applied to the element in which it is defined and to all the children of that element.
+
+The second namespace created allows us to assign a namespace to an element without also assigning that namespace to its descendants.
+Ex. <anc_civ:civilization>
+
+Namespaces are useful if combining two XML documents that may use the same element names for different purposes;
+we can differentiate the different elements with the same name by using namespaces.
+Namespaces would generally not have to be used for attributes of the same name since attributes are local to the element to which they belong,
+and are thus differentiated in that way.
+-->

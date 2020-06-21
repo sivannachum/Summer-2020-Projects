@@ -1,0 +1,102 @@
+<!--A DTD defines the valid tags, attributes, and element hierarchies in an XML document-->
+<!-- DTDs don't require elements and attributes to be declared in any specific order -->
+
+<!--
+This defines an internal entity for the corresponding XML document (general entity).
+Now we can abbreviate Wonders of the World there using &wow; and the processor will properly unpack it when processing.
+This abbreviation can also be used by external entities that will be referenced in the XML document, and it will be properly unpacked.
+-->
+<!ENTITY wow "Wonders of the World">
+<!--
+This defines an external entity for the corresponding XML document.
+SYSTEM means that the processor should look for the proper document outside the XML file.
+We can integrate this specific document into the XML using &zeus;
+-->
+<!ENTITY zeus SYSTEM "zeus-story.ent">
+<!--
+The % symbol means this is an entity for this DTD document (parameter entity). This particular entity is internal.
+This allows us to use %p; instead of typing out (#PCDATA) each time
+-->
+<!ENTITY % p "(#PCDATA)">
+<!--This external entity for the DTD document allows us to reference the main image element details using %main_image;-->
+<!ENTITY % main_image SYSTEM "main-image-details.ent">
+
+<!--The + means one or more-->
+<!ELEMENT ancient_wonders (wonder+)>
+
+<!--Here we list the child elements of wonder; the order in which they appear here is the order in which they must appear in the XML document-->
+<!--the * means 0 or more-->
+<!ELEMENT wonder (name+, location, height, history, main_image, source*)>
+<!--
+If we said instead something like wonder(#PCDATA | name | location | city | country)* this would indicate that
+wonder could contain parsed character data, a name element, a location element, a city element, or a country element;
+the asterick allows it to contain any combination of those any number of times.
+-->
+
+<!--PCDATA = parsed character data-->
+<!ELEMENT name %p;>
+<!--Defines a list of attributes for the element name-->
+<!--CDATA = character data, as attributes are not parsed by the processor-->
+<!--Attributes can be #REQUIRED, #IMPLIED (i.e. optional), or have a default value-->
+<!ATTLIST name
+		language CDATA #REQUIRED>
+		
+<!ELEMENT location (#PCDATA)>
+<!--
+Instead of (#PCDATA), you could say ANY to indicate the location element can have any form;
+for example maybe it's PCDATA but maybe it just contains child city and country elements (which would themselves have to be declared in the DTD).
+Making all elements have "ANY" form defeats the point of a DTD; this should be used sparsely, for example if compiling different XML documents and
+unsure of how they have certain data formed.
+-->
+
+<!--
+NMTOKEN means the value must follow XML naming conventions
+(no whitespace, starts with a letter or underscore, only contains letters/hyphens/numbers/underscores)
+-->
+<!--"feet" indicates that the default value of the attribute, if none is specified, is feet-->
+<!--#FIXED means that feet MUST be the value of this attribute; if the attribute value is specified, it has to be feet and would be wrong if it were something else-->
+<!ELEMENT height (#PCDATA)>
+<!ATTLIST height
+		units NMTOKEN #FIXED "feet">
+
+<!--? means 0 or 1-->
+<!ELEMENT history (year_built, year_destroyed?, how_destroyed?, story)>
+<!--We could also say history((year_built, year_destroyed, how_destroyed, story) | (year_built, story)); they are equivalent-->
+
+<!ELEMENT year_built (#PCDATA)>
+<!--The era can either be BC or AD-->
+<!ATTLIST year_built
+		era (BC | AD) #REQUIRED>
+		
+<!ELEMENT year_destroyed (#PCDATA)>
+<!ATTLIST year_destroyed
+		era (BC | AD) #REQUIRED>
+
+<!ELEMENT how_destroyed (#PCDATA)>
+
+<!ELEMENT story (#PCDATA | para)*>
+
+<!ELEMENT para EMPTY>
+
+%main_image;
+		
+<!ELEMENT source EMPTY>
+<!ATTLIST source
+		sectionid CDATA #REQUIRED
+		newspaperid CDATA #REQUIRED>
+
+<!--
+Attributes can also be ID, which means they are unique among the elements. ID attributes can be #REQUIRED or #IMPLIED, they cannot have a default value.
+Attributes can also be IDREF, meaning they must refer to an existing ID attribute. Various of these attributes can refer to the same ID (ids can be repeated).
+Attributes can also be IDREFS, meaning they can refer to a list of existing ID attributes, the list separated by whitespace.
+This list can have repeated IDs, ex. (w_134, w_134, w_134). To be more strict about this, an XML schema, rather than a DTD must be used.
+-->
+
+<!--
+Pros and Cons of DTDs:
+Pros: compact and easily comprehended with little direction, can be defined inline for quick development,
+  can define entities, most widely accepted/supported by most XML parsers
+Cons: not written using XML syntax and require parsers to support an additional language, do not support Namespaces,
+  do not have data typing (requiring data to be an int, a str, or a date, etc.) thereby decreasing the strength of the validation,
+  have limited capacity to define how many child elements can nest within a given parent element (cannot specify an exact number if more than 1)
+-->
