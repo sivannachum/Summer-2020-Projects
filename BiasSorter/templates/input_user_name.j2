@@ -1,0 +1,71 @@
+<style type="text/css">
+    <!--
+
+    #mainTable{
+        font-size: 19px;
+        font-family: 'Times New Roman', serif;
+        text-align: center;
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: separate;
+        border-spacing: 10px 5px;
+    }
+
+    #login {
+        font-size: 19px;
+        font-family: 'Times New Roman', serif;
+        font-weight: bold;
+        text-align: left;
+        right:350px;
+        bottom:5px;
+        height: 200px;
+        width:200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    input[type=text] {
+        z-index: 10;
+        width: 30px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-position: 10px 10px; 
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+        height: 30px;
+        display: block;
+        text-align: left
+        margin-left: auto;
+        margin-right: auto;
+    }
+    input[type=text]:focus {
+        width: 200px;
+    }
+
+    -->
+</style>
+
+<html>
+    <div id="login" align="center">
+            
+         <form name="frmLogin" method="post" action="">
+            <br><br>
+            <table align="center" width="300">
+                
+                <tr>
+                    <td id="login">Username:</td>
+                    <td><input type="text" name="username" placeholder="User.." size="30" /></td>
+                </tr>
+
+                
+            </table>
+            <input type="hidden" name="acao" value="login" />
+        </form>
+</html>
