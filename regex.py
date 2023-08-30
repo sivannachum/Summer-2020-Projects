@@ -62,6 +62,13 @@ def run_regex_phone() -> float:
   """
   start = time.time()
   for string in phone_numbers:
+    regex_valid_phone_number(string)
+  for string in not_phone_numbers:
+    regex_valid_phone_number(string)
+  for string in weird_phone_numbers:
+    regex_valid_phone_number(string)
+  """
+  for string in phone_numbers:
     if regex_valid_phone_number(string):
       print(string, "is a valid phone number")
     else:
@@ -82,6 +89,7 @@ def run_regex_phone() -> float:
       print(string, "is a valid phone number")
     else:
       print(string, "is NOT a valid phone number")
+  """
   end = time.time()
   return end-start
 
@@ -96,11 +104,11 @@ def if_statements_valid_phone_number(phone_number: str) -> bool:
   length = len(phone_number)
   # phone number must at least have 10 characters: ex. 1234567890
   if length < 10:
-    print(phone_number, "is not long enough")
+    #print(phone_number, "is not long enough")
     return False
   # phone number can have at most 17 characters: ex. +1 (123) 456 7890
   elif length > 17:
-    print(phone_number, "is too long")
+    #print(phone_number, "is too long")
     return False
   
   # Note: You could give more details about the specific errors by adding more if statements throughout this method
@@ -113,10 +121,10 @@ def if_statements_valid_phone_number(phone_number: str) -> bool:
     if char in '0123456789':
       digits += 1
   if digits < 10:
-    print(phone_number, "does not have enough digits")
+    #print(phone_number, "does not have enough digits")
     return False
   elif digits > 11:
-    print(phone_number, "has too many digits")
+    #print(phone_number, "has too many digits")
     return False
   
   # every character must be digits
@@ -284,6 +292,13 @@ def run_if_statements_phone() -> float:
   """
   start = time.time()
   for string in phone_numbers:
+    if_statements_valid_phone_number(string)
+  for string in not_phone_numbers:
+    if_statements_valid_phone_number(string)
+  for string in weird_phone_numbers:
+    if_statements_valid_phone_number(string)
+  """
+  for string in phone_numbers:
     if if_statements_valid_phone_number(string):
       print(string, "is a valid phone number")
     else:
@@ -304,6 +319,7 @@ def run_if_statements_phone() -> float:
       print(string, "is a valid phone number")
     else:
       print(string, "is NOT a valid phone number")
+  """
   end = time.time()
   return end-start
 
@@ -344,6 +360,13 @@ def run_regex_email() -> float:
   """
   start = time.time()
   for string in emails:
+    regex_valid_email(string)
+  for string in not_emails:
+    regex_valid_email(string)
+  for string in weird_emails:
+    regex_valid_email(string)
+  """
+  for string in emails:
     if regex_valid_email(string):
       print(string, "is a valid email")
     else:
@@ -364,6 +387,7 @@ def run_regex_email() -> float:
       print(string, "is a valid email")
     else:
       print(string, "is NOT a valid email")
+  """
   end = time.time()
   return end-start
 
@@ -377,11 +401,11 @@ def if_statements_valid_email(email: str) -> bool:
   length = len(email)
   # The simplest email would be a@a.cc, so length must be at least 6
   if length < 6:
-    print(email, "is not long enough")
+    #print(email, "is not long enough")
     return False
   # The first character of the email prefix should be a letter or number
   if email[0] not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890':
-    print(email, "does not start with a letter or number")
+    #print(email, "does not start with a letter or number")
     return False
   
   # Check for a proper email perfix
@@ -394,12 +418,12 @@ def if_statements_valid_email(email: str) -> bool:
       if i+1 < length and email[i+1] in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890':
         i += 2
       else:
-        print(email, "has an underscore, period, or hyphen not followed by a letter/number")
+        #print(email, "has an underscore, period, or hyphen not followed by a letter/number")
         return False
     elif email[i] in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890':
       i += 1
     else:
-      print(email, "has an invalid character in the email prefix")
+      #print(email, "has an invalid character in the email prefix")
       return False
   
   if i == length:
@@ -407,7 +431,7 @@ def if_statements_valid_email(email: str) -> bool:
   
   # The first character of the email domain should be a letter or number
   if email[i] not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890':
-    print(email, "has a domain that does not begin with a letter or number")
+    #print(email, "has a domain that does not begin with a letter or number")
     return False
   i += 1
 
@@ -417,7 +441,7 @@ def if_statements_valid_email(email: str) -> bool:
       if i+1 < length and email[i+1] in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890':
         i += 2
       else:
-        print(email, "has a hyphen not followed by a letter/number in the domain")
+        #print(email, "has a hyphen not followed by a letter/number in the domain")
         return False
     elif email[i] == '.':
       i += 1
@@ -425,7 +449,7 @@ def if_statements_valid_email(email: str) -> bool:
     elif email[i] in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890':
       i += 1
     else:
-      print(email, "has an invalid character in the email domain")
+      #print(email, "has an invalid character in the email domain")
       return False
   
   # Need at least two characters after the period
@@ -444,11 +468,11 @@ def if_statements_valid_email(email: str) -> bool:
       number_letters += 1
       i += 1
     else:
-      print(email, "has an invalid character in the email domain, after the period")
+      #print(email, "has an invalid character in the email domain, after the period")
       return False
 
   if number_letters < 2:
-    print(email, "does not have enough letters after the period in the domain")
+    #print(email, "does not have enough letters after the period in the domain")
     return False
   elif not another_period:
     return True
@@ -462,11 +486,11 @@ def if_statements_valid_email(email: str) -> bool:
       number_letters += 1
       i += 1
     else:
-      print(email, "has an invalid character in the email domain, after the second period")
+      #print(email, "has an invalid character in the email domain, after the second period")
       return False
   
   if number_letters < 2:
-    print(email, "does not have enough letters after the second period in the domain")
+    #print(email, "does not have enough letters after the second period in the domain")
     return False
   else:
     return True
@@ -477,6 +501,13 @@ def run_if_statements_email() -> float:
   Return how long running this method (i.e. the tests) took.
   """
   start = time.time()
+  for string in emails:
+    if_statements_valid_email(string)
+  for string in not_emails:
+    if_statements_valid_email(string)
+  for string in weird_emails:
+    if_statements_valid_email(string)
+  """
   for string in emails:
     if if_statements_valid_email(string):
       print(string, "is a valid email")
@@ -498,6 +529,7 @@ def run_if_statements_email() -> float:
       print(string, "is a valid email")
     else:
       print(string, "is NOT a valid email")
+  """
   end = time.time()
   return end-start
 
@@ -543,21 +575,14 @@ for i in range(num_trials):
 # Determine figure size
 plt.figure(figsize=(20,5))
 
-# The first parameter of scatter is the x-axis
-# The second parameter of scatter is the y-axis
-# s is the size of scatter dots
-# I made the size of a dot proprotional to the data number it represented
-# Thus a longer time to run corresponds to a bigger dot
-# c is the color
+# The first parameter of plot is the x-axis
+# The second parameter of plot is the y-axis
+# Then color
 # label specifies the label for that color on the legend
-s = [1200 * n for n in regex_phone_times_1]
-plt.scatter(trial_number, regex_phone_times_1, s=s, c='red',label='Regex Phone')
-s = [1200 * n for n in if_statements_phone_times_1]
-plt.scatter(trial_number, if_statements_phone_times_1, s=s, c='green',label='If Statements Phone')
-s = [1200 * n for n in regex_email_times_1]
-plt.scatter(trial_number, regex_email_times_1, s=s, c='blue',label='Regex Email')
-s = [1200 * n for n in if_statements_email_times_1]
-plt.scatter(trial_number, if_statements_email_times_1, s=s, c='black',label='If Statements Email')
+plt.plot(trial_number, regex_phone_times_1, 'r-',label='Regex Phone')
+plt.plot(trial_number, if_statements_phone_times_1, 'g-',label='If Statements Phone')
+plt.plot(trial_number, regex_email_times_1, 'b-',label='Regex Email')
+plt.plot(trial_number, if_statements_email_times_1, 'k-',label='If Statements Email')
 
 # Set a title for the plot
 plt.title("Runtime of Regular Expressions vs. If Statements in Different While Loops")
@@ -580,14 +605,10 @@ plt.show()
 plt.figure(figsize=(20,5))
 
 # Graph for Test 2
-s = [1200 * n for n in regex_phone_times_2]
-plt.scatter(trial_number, regex_phone_times_2, s=s, c='red',label='Regex Phone')
-s = [1200 * n for n in if_statements_phone_times_2]
-plt.scatter(trial_number, if_statements_phone_times_2, s=s, c='green',label='If Statements Phone')
-s = [1200 * n for n in regex_email_times_2]
-plt.scatter(trial_number, regex_email_times_2, s=s, c='blue',label='Regex Email')
-s = [1200 * n for n in if_statements_email_times_2]
-plt.scatter(trial_number, if_statements_email_times_2, s=s, c='black',label='If Statements Email')
+plt.plot(trial_number, regex_phone_times_2, 'r-',label='Regex Phone')
+plt.plot(trial_number, if_statements_phone_times_2, 'g-',label='If Statements Phone')
+plt.plot(trial_number, regex_email_times_2, 'b-',label='Regex Email')
+plt.plot(trial_number, if_statements_email_times_2, 'k-',label='If Statements Email')
 
 # Set a title for the plot
 plt.title("Runtime of Regular Expressions vs. If Statements in the Same While Loop")
@@ -660,32 +681,32 @@ print("\n")
 """# Sample Output:
 **Mean Runtime Different While Loops + How Often Regexes Were Faster Than If Statements:**
 
-Regex Phone Mean: 0.017780004s
+Regex Phone Mean: 0.000097466s
 
-If Statements Phone Mean: 0.017977662s
+If Statements Phone Mean: 0.000123968s
 
-Regex Email Mean: 0.007632954s
+Regex Email Mean: 0.000049713s
 
-If Statements Email Mean: 0.011151059s
+If Statements Email Mean: 0.000090201s
 
-Regexes were faster than if statements at validating phone numbers: 49 times
+Regexes were faster than if statements at validating phone numbers: 88 times
 
-Regexes were faster than if statements at validating emails: 72 times
+Regexes were faster than if statements at validating emails: 100 times
 
 
 **Mean Runtime Same While Loop + How Often Regexes Were Faster Than If Statements:**
 
-Regex Phone Mean: 0.017522833s
+Regex Phone Mean: 0.000068069s
 
-If Statements Phone Mean: 0.018089569s
+If Statements Phone Mean: 0.000114470s
 
-Regex Email Mean: 0.008501492s
+Regex Email Mean: 0.000050447s
 
-If Statements Email Mean: 0.012540498s
+If Statements Email Mean: 0.000084405s
 
-Regexes were faster than if statements at validating phone numbers: 54 times
+Regexes were faster than if statements at validating phone numbers: 98 times
 
-Regexes were faster than if statements at validating emails: 73 times
+Regexes were faster than if statements at validating emails: 100 times
 """
 
 # Graph the min, median, and max for the trials for each validation method
@@ -715,13 +736,13 @@ plt.plot(x_axis, [sorted_if_statements_email_1[0], \
          'k-', label="If Statements Email")
 
 # Set a title for the plot
-plt.title("Min, Median, and Max Runtime of Regular Expressions vs. If Statements in Different While Loop")
+plt.title("Min, Median, and Max Runtime of Regular Expressions vs. If Statements in Different While Loops")
 
 # Add a legend to the graph
 # loc specifies the location of the legend on the graph
 plt.legend(loc="upper left")
 
-# Add labels to the x and y-axes
+# Add label to the y axis
 plt.ylabel('Time to Run in Seconds')
 
 # Add a grid to the graph background
@@ -760,7 +781,7 @@ plt.title("Min, Median, and Max Runtime of Regular Expressions vs. If Statements
 # loc specifies the location of the legend on the graph
 plt.legend(loc="upper left")
 
-# Add labels to the x and y-axes
+# Add label to the y axis
 plt.ylabel('Time to Run in Seconds')
 
 # Add a grid to the graph background
@@ -768,7 +789,4 @@ plt.grid()
 # Show the graph
 plt.show()
 
-"""The difference in runtime speed of regular expressions versus if statements in validating phone numbers and emails in Python is negligible. Thus, regular expressions should be used when clarity and ease of code are more valued and when one does not mind false positives. These could, however, be eliminated by using more "or" statements in the regular expression. If statements require more code, but they give the programmer more control over exactly what type of input will be accepted. Also, they can be used to provide more details to the user about why their input is incorrect.
-
-Note that though the regular expressions come off as faster than the if statements for email validation, this is after I added more print statements in the if statements to give the user more details about why their email was incorrect. Before adding this extra information (which a regular expression cannot provide to a user), the difference in runtime between the regular expressions and the if statements in validating emails was negligible.
-"""
+"""The difference in runtime speed of regular expressions versus if statements in validating phone numbers and emails in Python clearly shows regular expressions to be superior. Thus, regular expressions should generally be used when speed at runtime is valued, in addition to clarity and ease of code. Though my regular expressions have false positives, these could be eliminated by using more "or" statements in the regular expression. If statements require more code, but they give the programmer more ease in controlling exactly what type of input will be accepted and they can be used to provide more details to the user about why their input is incorrect."""

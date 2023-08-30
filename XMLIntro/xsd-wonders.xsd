@@ -1,0 +1,322 @@
+﻿<?xml version="1.0"?>
+
+<!--
+XML schema elements can either be of simple type or of complex type.
+Simple type elements describe the text of an XML document; complex type elements describe its structure.
+There are four kinds of complex type elements: those that contain child elements, those that contain both child elements and text,
+  those that contain only text, and those that are empty.
+-->
+
+<!--The root element of an XML schema must be called schema-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!--
+  Annotations are XML schema comments that can be parsed and processed.
+  Annotations can be created anywhere in the XML Schema, after the root element
+  -->
+  <xs:annotation>
+    <xs:documentation>This XML Schema will be used to validate the set of XML documents for the Wonders of the World project.</xs:documentation>
+  </xs:annotation>
+
+  <!--
+  Here we declare an anonymous complexType. complexContent and restriction with base = "xs:anyType" are the defaults, so we don't actually have to type them.
+  simpleContent and complexContent both allow attributes.
+  simpleContent only allows string content, whereas complexContent allows child elements and empty elements.
+  An XML content can also have "mixed content", meaning it has both complex and simple content.
+  -->
+	<xs:element name="ancient_wonders">
+		<xs:complexType>
+		  <xs:complexContent>
+		    <xs:restriction base = "xs:anyType">
+		    <!--We can specify minOccur and maxOccur for sequences, unordered lists, and sets of choices-->
+			   <xs:sequence>
+			    <!--
+			    Must have at least one wonder, and can have as many as we want.
+  			  Default for minOccurs and maxOccurs is 1.
+  			  minOccurs and maxOccurs can only be used in local references/definitions
+			    -->
+				    <xs:element name="wonder" type="wonderType" minOccurs="1" maxOccurs="unbounded"/>
+			    </xs:sequence>
+        </xs:restriction>
+      </xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+<!--Here we declare a named complexType with complexContent. We name it so that we can reuse it for several elements.-->
+	<xs:complexType name="wonderType">
+	<!--When we require child elements to appear in sequence, they must appear in the order specified.-->
+		<xs:sequence>
+			<xs:element name="name" type="nameType" maxOccurs="unbounded"/>
+			<xs:element name="location" type="xs:string"/>
+			<xs:element name="height" type="heightType"/>
+			<xs:element name="history" type="historyType"/>
+			<xs:element name="main_image" type="imageType"/>
+			<xs:element name="source" type="sourceType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="nameType">
+  	<!--We declare this complexType to have simpleContent, meaning it only contains text (and perhaps attributes).-->
+		<xs:simpleContent>
+		  <!--base = the data type that is the foundation for this type-->
+		  <!--If we wanted to limit the base simple type with additional facets, we would instead type <xs:restriction ...-->
+			<xs:extension base="xs:string">
+			<!--
+			This attribute is a base/named simple type.
+			Attributes by default are optional.
+			You could also add value = "must_be" where must_be is the only acceptable value for the attribute.
+			To require that an attribute not be present, type use="prohibited".
+			You could also sepcify use="optional", though this is the default
+			-->
+				<xs:attribute name="language" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="heightType">
+		<xs:simpleContent>
+			<xs:extension base="xs:nonNegativeInteger">
+				<xs:attribute name="units" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="historyType">
+	<!--
+	The members of an xs:all element may appear once or not at all, in any order. minOccurs may only be set to 0 or 1. maxOccurs may only be set to 1.
+  Note that we could have also used xs:sequence here.
+	-->
+		<xs:all>
+			<xs:element name="year_built" type="yearType"/>
+			<xs:element name="year_destroyed" type="yearType" minOccurs="0"/>
+			<!--
+			To define with a fixed value
+			(only sets the content if the element actually appears empty in the XML; if it is omitted, then no content is set, content can only have this value if set):
+      <xs:element name="how_destroyed" type="destrType" fixed="fire"/>
+      
+      To define with a default value (sets the content if the element appears empty in the XML or if it is omitted, content can be manually set to different values):
+      <xs:element name="how_destroyed" type="destrType" default="fire"/>
+			-->
+			<xs:element name="how_destroyed" type="destrType" minOccurs="0"/>
+			<xs:element name="story" type="storyType"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="yearType">
+		<xs:simpleContent>
+			<xs:extension base="xs:positiveInteger">
+				<xs:attribute name="era" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<!--Here we have a named simple type definition. It is used for elements who have type="destrType"-->
+	<xs:simpleType name="destrType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="earthquake"/>
+			<xs:enumeration value="fire"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--
+	This is a mixed complex type, meaning it contains text and child elements.
+	As such, we must state that mixed="true".
+	Note that we do not define the text of the element explicitly.
+	-->
+	<xs:complexType name="storyType" mixed="true">
+		<xs:sequence>
+			<xs:element name="para" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType/>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--This is an empty element (contains no text or children, only attributes)-->
+	<xs:complexType name="imageType">
+		<xs:attribute name="file" type="xs:anyURI" use="required"/>
+		<xs:attribute name="w" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="h" type="xs:positiveInteger" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="sourceType">
+		<xs:attribute name="sectionid" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="newspaperid" type="xs:positiveInteger" use="required"/>
+	</xs:complexType>
+
+</xs:schema>
+
+<!--SIMPLE TYPES-->
+<!--
+Simple types can be of type xs:string, xs:boolean, xs:anyURI,
+xs:date (YYYY-MM-DD, ex. 2000-09-28),
+xs:time (hh:mm:ss.sss, ex. 21:08:00, fractional seconds are allowed and optional, times can be written with -hh:mm or +hh:mm to indicate time zone difference
+from UTC (Coordinated Universal Time) = GMT, you can just type Z for UTC),
+xs:dateTime (YYYY-MM-DDThh:mm:ss),
+xs:duration (PnYnMnDTnHnMnS, where P=period and is always required, T is only required if you have time units, ex. -P90D means 90 days ago),
+xs:gYear (YYYY, g stands for Gregorian), xs:gYearMonth (YYYY-MM), xs:gMonth (- -MM, first dash is missing year, second dash is separator),
+xs:gMonthDay (- -MM-DD), xs:gDay (- - -DD),
+xs:decimal (numbers with a finite number of digits on either side of the optional decimal point),
+xs:float (single precision, 32-bit floating point numbers, ex. 43e-2, includes +0, -0, INF, -INF, NaN (not a number)),
+xs:integer (whole numbers), xs:int (signed 32-bit integer, often used for database ID fields),
+xs:positiveInteger, xs:nonNegativeInteger, xs:negativeInteger, xs:nonPositiveInteger
+-->
+<!--
+Example anonymous custom simple type:
+<xs:element name="story">
+    <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:length value="1024"/>
+        </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  length = how long this data type must be
+-->
+
+<!--
+Types of restrictions:
+For numbers/dates/times: maxInclusive, maxExclusive, minInclusive, minExclusive
+For numbers: xs:totalDigits value="6"/>, <xs:fractionDigits value="4"/>; these define maximum values
+Xor choices: <xs:enumeration value="Colossus of Rhodes"/> <xs:enumeration value="Great Pyramid of Giza"/>
+<xs:pattern value="w_\d{3}"/> is a regex (ex. w_234 would be accepted)
+-->
+<!--
+To define a list of whitespace separated datetimes:
+<xs:simpleType>
+  <xs:list itemType="xs:dateTime"/>
+</xs:simpleType>
+-->
+<!--
+To indicate that an element can be one of various types:
+<xs:simpleType>
+  <xs:union memberTypes="xs:string xs:int"/>
+</xs:simpleType>
+This type represents either a string or an int
+-->
+
+<!--COMPLEX TYPES-->
+<!--
+Other than xs:sequence and xs:all, we can create a set of choices for an element's children. Ex.
+<xs:choice>
+    <xs:element name="location" type="xs:string"/>
+      <xs:sequence>
+        <xs:element name="city" type="xs:string"/>
+        <xs:element name="country" type="xs:string"/>
+      </xs:sequence>
+  </xs:choice>
+Here we can either have a location element, or city and country elements
+-->
+<!--
+New complex types can be derived from existing ones. Ex.
+<xs:complexType name="newHistoryType">
+		<xs:complexContent>
+		  We use extension to indicate that features will be added to the existing complex type
+			<xs:extension base="historyType">
+				<xs:sequence>
+					<xs:element name="who_built" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+<xs:complexType name="newHistoryType">
+  <xs:complexContent>
+  We use restriction to indicate that features will be removed from the existing complex type
+    <xs:restriction base="historyType">
+      <xs:sequence>
+        <xs:element name="year_built" type="yearType"/>
+        <xs:element name="year_destroyed" type="yearType"/>
+        <xs:element name="how_destroyed" type="destrType" fixed="fire"/>
+        <xs:element name="story" type="storyType"/>
+      </xs:sequence>
+    </xs:restriction>
+  </xs:complexContent>
+</xs:complexType>
+-->
+
+<!--GLOBAL DEFINITIONS-->
+<!--Global elements must be explicitly referenced in order to actually appear in a valid XML document, unlike local elements which are automatically integrated-->
+<!--Global elements = good for reuse; local elements = good for isolated scope / reuse of element names-->
+<!--In a DTD, every element is declared globally; there's no such thing as a locally defined element-->
+<!--
+You can globally define elements (meaning you define them as a child of xs:schema). Ex.
+<xs:element name="name">
+  <xs:complexType>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="language" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>
+
+Then you put them in another element as follows:
+<xs:complexType name="wonderType">
+		<xs:sequence>
+			<xs:element ref="name"/>
+			<xs:element name="location" type="xs:string"/>
+			<xs:element name="height" type="heightType"/>
+			<xs:element name="history" type="historyType"/>
+			<xs:element name="main_image" type="imageType"/>
+			<xs:element name="source" type="sourceType"/>
+		</xs:sequence>
+	</xs:complexType>
+-->
+<!--
+You can also define a model group globally (analogous to a parameter entity in a DTD). Ex.
+<xs:group name="image_element">
+  <xs:sequence>
+    <xs:element name="image">
+      <xs:complexType>
+        <xs:attribute name="file" type="xs:anyURI"/>
+        <xs:attribute name="w" type="xs:positiveInteger"/>
+        <xs:attribute name="h" type="xs:positiveInteger"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="source" type="xs:string"/>
+  </xs:sequence>
+</xs:group>
+
+This is then referenced by 
+<xs:element name="main_image">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:group ref="image_element"/>
+      <xs:element name="caption" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+A model group can be referenced in complex type definitions and even in other groups.
+-->
+
+<!--ATTRIBUTES-->
+<!--
+All attributes in this document are named simple types.
+Attributes can also be anonymous simple types. Ex.
+<xs:attribute name="newspaperid">
+  <xs:simpleType>
+    <xs:restriction base="xs:positiveInteger">
+      <xs:pattern value="\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+or globally defined attributes, defined the same way as anonymous simple types. To use:
+<xs:attribute name="attribute_name" ref="label"/>
+
+Attributes must be defined at the very end of the complex type to which they belong
+-->
+<!--
+Just like you can define model groups, you can define attribute groups. Ex.
+<xs:attributeGroup name="imageAttrs">
+  <xs:attribute name="file" type="xs:anyURI" use="required"/>
+  <xs:attribute name="w" type="xs:positiveInteger" use="required"/>
+  <xs:attribute name="h" type="xs:positiveInteger" use="required"/>
+</xs:attributeGroup>
+
+This is then referenced by
+<xs:complexType name="videoType">
+  <xs:attributeGroup ref="imageAttrs"/>
+  <xs:attribute name="format" type="xs:string"/>
+</xs:complexType>
+-->

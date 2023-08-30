@@ -1,0 +1,68 @@
+<style type="text/css">
+    <!--
+
+    #mainTable{
+        font-size: 19px;
+        font-family: 'Times New Roman', serif;
+        text-align: center;
+        vertical-align: middle;
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: separate;
+        border-spacing: 10px 5px;
+    }
+ 
+    #leftField{
+        font-size: 19px;
+        font-family: 'Times New Roman', serif;
+        text-align: left;
+        width: 350px;
+        height: 450px;
+        border: 1px solid #000;
+        cursor: pointer;
+    }
+ 
+    #rightField{
+        font-size: 19px;
+        font-family: 'Times New Roman', serif;
+        text-align: left;
+        width: 350px;
+        height: 450px;
+        border: 1px solid #000;
+        cursor: pointer;
+    }
+ 
+    -->
+</style>
+
+<html>
+    <body text="#000000" bgcolor="#ffffff" link="#e097d9" vlink="#e097d9" alink="#79a2c9">
+ 
+        <head><title>Which code is best?</title></head>
+        <p class="instructions">
+            <center><br/>
+                <b>WHICH CODE DO YOU PREFER?</b><br/>
+                Pick the code you think is better in each battle.<br/>
+            </center>
+        </p>
+ 
+    <table id="mainTable" align="center">
+        <tbody>
+        
+        <tr>
+        <td id="battleNumber" colspan="3" style="padding-bottom: 10px;" style="text-align:center;"><b>battle #{{battle_number}}<br>{{percent_sorted}}% sorted</b></td>
+        </tr>
+ 
+        <tr>
+        
+        <td id="leftField" style="border:0px" rowspan="2"><form method="post"><div align=center><input id="leftField" type="submit" name="submit.left" value={{left_option}}></div></form></td>
+        <td id="rightField" style="border:0px" rowspan="2"><form method="post"><div align=center><input id="rightField" type="submit" name="submit.right" value={{right_option}}></div></form></td>
+        </tr>
+ 
+        </tbody>
+    </table>
+ 
+    <div id="resultField" style="text-align: left;">{{results}}</div>
+
+</html>

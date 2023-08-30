@@ -1,0 +1,12 @@
+<html>
+    <title>Submissions for {{group_id}}</title>
+    <body>
+        <h2>{{group_id}}</h2>
+
+        <ul>
+            {% for item in submissions %}
+                <li><code>{{item}}</code></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

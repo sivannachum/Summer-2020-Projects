@@ -1,0 +1,75 @@
+﻿<?xml version="1.0"?>
+<!--
+The line above is the XML declaration, which notes which version of XML is being used.
+This is a processing instruction, as noted by it's beginning and ending <> ? marks
+You can also specify encoding="[]" here. 
+This must be the first line in the document.
+-->
+
+<!-- 
+XML is designed to store and transport data, not display it
+XML is not a language itself
+Custom markup languages created with XML = XML applications
+-->
+
+<!--
+This begins the data part of the document; it is the root element.
+There can only be one root element in an XML document.
+Everything must be contained within the root element.
+-->
+<wonder>
+  <!---
+  These elements are child elements, which describe the root element in more detail
+  -->
+	<name>Colossus of Rhodes</name>
+	<location>Rhodes, Greece</location>
+	<!--
+	The attribute units gives additional info about the element, without adding text to the element itself.
+	Info contained in an attribute is generally considered metadata (info about the data in the element, rather than data itself).
+	Attributes are name-value pairs.
+	-->
+	<height units="feet">&lt; 107</height>
+	<!--
+	This is an empty element; thus it can have an all-in-one opening and closing tag with a final slash.
+	This element has attributes to store data about the element but no text content.
+	-->
+	<main_image filename="colossus.jpg"/>
+	
+	<!--
+To keep the XML processor from interpretting XML that you may be writing about in your document, use <!CDATA [...]]>
+This can also be used to enclose HTML and JavaScript.
+The special meanings symbols have is ignored in the CDATA section; i.e. type & instead of &amp;
+If you want to write ]]> without closing the CDATA section, you must write &gt;
+-->
+	<![CDATA[
+<ancient_wonders>
+  <wonder>
+    <name language="English">Colossus of Rhodes</name>
+    <name language="Greek">Κολοσσός της Ρόδου</name>
+    <location>Rhodes, Greece</location>
+    <height units="feet">107</height>
+    <main_image file="colossus.jpg" w="528" h="349"/>
+    <source sectionid="101" newspaperid="21"/>
+  </wonder>
+</ancient_wonders>
+]]>
+</wonder>
+
+<!--
+An XML document is considered well-formed if it satisfies these rules:
+The XML document must contain exactly one root element, which contains all the other elements in the document.
+Every element must have a closing tag.
+Elements must be properly nested.
+XML is case-sensitive.
+An attribute's value must always be enclosed in quotation marks, single or double.
+Element and attribute names must begin with a letter, underscore, or colon; names beginning with "xml" (in any case) are reserved and cannot be used
+-->
+
+<!--
+Predefined entities in XML:
+&amp; creates a &
+&lt; creates a <
+&gt; creates a >
+&quot; creates a "
+&apos creates a '
+-->

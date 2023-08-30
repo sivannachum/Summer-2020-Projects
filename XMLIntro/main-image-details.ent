@@ -1,0 +1,10 @@
+<!--
+This definition for a main element may be in a separate document in case we want to use it for multiple DTDs.
+We can then have those DTDs reference it
+-->
+<!--The main_image element is empty as it only contains attributes and no data-->
+<!ELEMENT main_image EMPTY>
+<!ATTLIST main_image
+          file CDATA #REQUIRED
+          w CDATA #REQUIRED
+          h CDATA #REQUIRED>
